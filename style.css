@@ -20,7 +20,14 @@ img{
 }
 .frente, .verso{
     position: absolute;
+    
 }
+
+
+/* .verso{
+    background-color: black;
+    opacity: 0.9;
+} */
 
 .card{
     height: 150px;

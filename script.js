@@ -1,44 +1,141 @@
-let img = ['img1.jpg','img2.jpg','img3.jpg','img4.jpg','img5.jpg','img6.jpg']
+APAGA A LINHA 1
 
-let imagens = img.concat(img)
+let imagensGatos = [
+  "gatinho202.jpg",
+  "gatinho200.jpg",
+  "gatinho206.jpg",
+  "gatinho408.jpg",
+  "gatinho450.jpg",
+  "gatinho510.jpg",
+];
+imagensGatos = document.querySelectorAll(".card");
+let carta1;
+let carta2;
+let imagens = imagensGatos.concat(imagensGatos);
 
-let card1 
-let card2
-img = document.querySelectorAll ('img')
-
-
-quadrados = document.querySelectorAll('.card');
-function virarCard(){
-    this.classList.toggle('flip');
-
-    classList.toggle(img)    
-
-    // console.log('fui clicado');
-    // console.log(this);
+// Cria uma lista com dias copias das imagens
+imagens = embaralhar(imagens);
+// Inicio do jogo
+for(carta of cartas){
+  abrir(carta);
 }
-quadrados.forEach(quadrado => quadrado.addEventListener('click', virarCard));
-// colocamos efeito de FLIP nas cartas
+setTimeout(function(){
+  iniciarJogada();
 
-// Manter a Funtion embatalhar dessa forma, estou corrigindo erros.
+},2000);
+// Função recebe Vetor com uma lista vazia e embaralha as cartas
 
-function embaralhar (quadrados2){
-    let numeroCartas= quadrados2.length;
-    let embaralharCartas = 0; 
-    let i;
-while(0 !== numeroCartas){
-       i= Math.floor(Math.random()* numeroCartas);
-    numeroCartas -= 1;
-    embaralharCartas= quadrados2[numeroCartas];
-    quadrados2[numeroCartas] = quadrados2[i];
-    quadrados2[i] = embaralharCartas;
-    console.log (embaralharCartas)
+function embaralhar(vetor){
+  let lugar;
+  let posicao;
+  
+  
+  for(let variavel = vetor_length- 1; variavel !== 0; variavel--){
+    posicao= Math.floor(Math.random()*variavel);
+
+    lugar = vetor[variavel];
+    vetor[variavel]= vetor[posicao];
+    vetor[posicao] = lugar;
+  }
+  return vetor;
 }
-return quadrados2;
+
+// Funções para mostrar frente e verso da carta
+function fecharCarta(face){
+  face.style.backgroundImage= "url'('img/itachi.jpeg')"
+  face.onclick= clique;
 }
 
-embaralhar(img)
+function abrirCarta(face){
+  face.style.backgroundImage= `url('img/${img[Number(carta.id)]}')`;
+  carta.onclick= null ;
+  
+}
+// Funções para mostrar frente e verso da carta
 
+// Faz as cartas não funcionar com o click
+function cartaParacima(){
+  for(let carta of cartas){
+    carta.onclick= null;
+  }
+}
+// Função fecha todas as cartas erradas
+function cartaParabaixo(){
+  for(let carta of cartas){
+    if(!carta.classList.contains('certa')){
+      fecharCarta(carta);
+    }
+  }
+}
 
-// embaralhar(imagens);
-// Não apresenta erros no Console, mas não esta embaralhando as Cartas. Não esquecer de verificar os parametos !
+// Compara se as cartas são iguais
+function cartasCorretas(event){
+  abrirCarta(event.target);
+  if(carta1){
+    carta2= event.target;
+    cartaParacima();
+    verificarCartas();
+  }
+  else{
+    carta1= event.target;
+  }
+}
+// Função compara as cartas iguais, se for igual trava as 2 para cima 
+function verificarCartas(){
+  if(carta1.style.backgroundImage!==carta2.style.backgroundImage){
+    setTimeout(function(){
+      fecharCarta(carta1);
+      fecharCarta(carta2);
+      comecarJogo();
+    }, 2000);
+  }
+  else{
+    carta1.classList.add('certa');
+    carta2.classList.add('certa');
+    comecarJogo();
+  }
+}
+// Função para iniciar a jogada
+function comecarJogo(){
+  carta1= null;
+  carta2=null;
+  cartaParabaixo();
+}
+// // console.log(img);
 
+// function virarCard() {
+//   this.classList.toggle("flip");
+//   classList.toggle();
+// }
+// quadrados.forEach(quadrado => quadrado.addEventListener("click", virarCard));
+// // colocamos efeito de FLIP nas cartas
+
+// // Fun
+
+// function embaralhar(cards) {
+//   let tamanhoCards = cards.length - 1;
+//   let indiceAleatorio;
+//   let valorTemporario;
+
+//   cards.forEach((card, position) => {
+//     if (tamanhoCards !== 0) {
+//       indiceAleatorio = Math.floor(Math.random() * tamanhoCards);
+//       valorTemporario = cards[position];
+//       cards[position] = cards[indiceAleatorio];
+//       cards[indiceAleatorio] = valorTemporario;
+//     }
+//   });
+
+//   return cards;
+// }
+
+// // const emba =  quadrados[index].getElementById("card").children.length;
+// const cardsEmbaralhados = embaralhar(imagens);
+// quadrados.forEach((val, index) => {
+//   cardsEmbaralhados.forEach(caminhoImagem => {
+    
+//     quadrados[index].children[0].src = caminhoImagem;  });
+
+//     console.log(val.children[0].src);
+
+// });

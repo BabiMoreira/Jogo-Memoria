@@ -1,14 +1,12 @@
-APAGA A LINHA 1
-
 let imagensGatos = [
-  "gatinho202.jpg",
-  "gatinho200.jpg",
-  "gatinho206.jpg",
-  "gatinho408.jpg",
-  "gatinho450.jpg",
-  "gatinho510.jpg",
+  "img/img1.jpg",
+  "img/img2.jpg",
+  "img/img3.jpg",
+  "img/img4.jpg",
+  "img/img5.jpg",
+  "img/img6.jpg",
 ];
-imagensGatos = document.querySelectorAll(".card");
+let cartas = document.querySelectorAll(".card");
 let carta1;
 let carta2;
 let imagens = imagensGatos.concat(imagensGatos);
@@ -30,14 +28,23 @@ function embaralhar(vetor){
   let posicao;
   
   
-  for(let variavel = vetor_length- 1; variavel !== 0; variavel--){
+  for(let variavel = vetor.length- 1; variavel !== 0; variavel--){
     posicao= Math.floor(Math.random()*variavel);
 
     lugar = vetor[variavel];
     vetor[variavel]= vetor[posicao];
     vetor[posicao] = lugar;
   }
-  return vetor;
+  console.log(vetor);
+  mandarCartas(vetor);
+}
+
+function mandarCartas(lista){
+  
+  for (i = 0; i<lista.length;i++){
+    document.querySelectorAll('img')[i].src = lista[i];
+    console.log(document.querySelectorAll('img')[i]);
+  }
 }
 
 // Funções para mostrar frente e verso da carta
